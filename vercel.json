@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/ads.ts": {
+      "runtime": "nodejs20.x"
+    }
+  }
+}
