@@ -2,7 +2,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.hellokittyfriends.cromos',
-  appName: 'Hello Kitty & Friends Cromos',
+  appName: 'Gatita Blanca & Friends Cromos',
   webDir: 'dist',
   bundledWebRuntime: false,
   android: {

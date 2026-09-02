@@ -11,7 +11,7 @@ export default function LoginPage({ onLogin, error, loading }: {
       <div className="mx-auto mb-5 grid h-20 w-20 place-items-center rounded-full bg-pink-100 text-pink-600">
         <Heart size={40} fill="currentColor" />
       </div>
-      <h1 className="text-3xl font-extrabold text-pink-600">HELLO KITTY</h1>
+      <h1 className="text-3xl font-extrabold text-pink-600">GATITA BLANCA</h1>
       <p className="mb-8 text-lg font-bold text-gray-600">& FRIENDS</p>
       <label className="mb-2 block text-left text-sm font-extrabold text-gray-700" htmlFor="profile">Introduce tu Perfil</label>
       <input

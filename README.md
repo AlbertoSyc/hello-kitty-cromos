@@ -1,4 +1,4 @@
-# Hello Kitty & Friends — APK Android
+# Gatita Blanca & Friends — APK Android
 
 Aplicación React + Vite + Tailwind empaquetada como aplicación Android con **Capacitor 8**.
 
