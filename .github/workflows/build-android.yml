@@ -41,9 +41,9 @@ jobs:
         working-directory: android
         run: ./gradlew assembleDebug
 
-      - name: Upload APK
+      - name: Upload APK File Directly
         uses: actions/upload-artifact@v4
         with:
-          name: hello-kitty-cromos-debug-apk
+          name: app-debug
           path: android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
