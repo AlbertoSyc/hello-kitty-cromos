@@ -1,4 +1,4 @@
-# Gatita Blanca & Friends — APK Android
+# Gatita Blanca Cromos — APK Android
 
 Aplicación React + Vite + Tailwind empaquetada como aplicación Android con **Capacitor 8**.
 

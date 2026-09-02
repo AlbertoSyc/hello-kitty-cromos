@@ -7,16 +7,17 @@ export default function HomePage({ profile, cards, userCards, onLogout }: {
 }) {
   const s = stats(cards, userCards);
 
-  const repeatedByCategory = cards
-    .filter(card => (userCards[card.id] ?? 0) > 1)
+  // Pending cards are grouped by the card's `name` field from cards.json.
+  const pendingByName = cards
+    .filter(card => (userCards[card.id] ?? 0) === 0)
     .reduce<Record<string, Card[]>>((groups, card) => {
-      const category = card.category?.trim() || 'Sin categoría';
-      (groups[category] ??= []).push(card);
+      const name = card.name?.trim() || 'Sin nombre';
+      (groups[name] ??= []).push(card);
       return groups;
     }, {});
 
-  const repeatedCategories = Object.entries(repeatedByCategory)
-    .sort(([a], [b]) => a.localeCompare(b, 'es'));
+  const pendingNames = Object.entries(pendingByName)
+    .sort(([a], [b]) => a.localeCompare(b, 'es', { sensitivity: 'base' }));
 
   return <div className="space-y-5">
     <header className="flex items-center justify-between">
@@ -41,27 +42,27 @@ export default function HomePage({ profile, cards, userCards, onLogout }: {
     <section className="rounded-[2rem] bg-white p-6 shadow-soft ring-1 ring-pink-100">
       <div className="mb-5">
         <p className="text-sm font-bold text-gray-400">Tu colección</p>
-        <h2 className="text-2xl font-extrabold text-gray-800">Cromos repetidos</h2>
+        <h2 className="text-2xl font-extrabold text-gray-800">Cromos pendientes</h2>
       </div>
 
-      {repeatedCategories.length === 0 ? (
+      {pendingNames.length === 0 ? (
         <div className="rounded-2xl bg-gray-50 p-5 text-center text-sm font-bold text-gray-400">
-          Todavía no tienes cromos repetidos.
+          ¡No tienes cromos pendientes!
         </div>
       ) : (
         <div className="space-y-5">
-          {repeatedCategories.map(([category, categoryCards]) => (
-            <div key={category}>
-              <h3 className="mb-2 text-sm font-extrabold uppercase tracking-wide text-pink-600">{category}</h3>
+          {pendingNames.map(([name, nameCards]) => (
+            <div key={name}>
+              <h3 className="mb-2 text-sm font-extrabold uppercase tracking-wide text-pink-600">{name}</h3>
               <div className="overflow-hidden rounded-2xl bg-gray-50 ring-1 ring-gray-100">
-                {categoryCards
+                {nameCards
                   .sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }))
                   .map(card => (
                     <div key={card.id} className="flex items-center gap-3 border-b border-gray-100 px-4 py-3 last:border-b-0">
                       <span className="min-w-12 rounded-lg bg-white px-2 py-1 text-center text-sm font-extrabold text-pink-600 shadow-sm ring-1 ring-gray-100">
                         {card.id}
                       </span>
-                      <span className="text-sm font-bold text-gray-700">{card.name}</span>
+                      <span className="text-sm font-bold text-gray-700">Cromo {card.id}</span>
                     </div>
                   ))}
               </div>

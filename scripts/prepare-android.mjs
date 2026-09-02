@@ -59,6 +59,19 @@ run('npx', [
 // Copy web assets and synchronize all Capacitor plugins/native configuration.
 run('npx', ['cap', 'sync', 'android']);
 
+// Ensure the label shown under the installed Android app icon is exactly the
+// public app name, even when an existing android/ directory is reused.
+const stringsPath = path.join(androidDir, 'app', 'src', 'main', 'res', 'values', 'strings.xml');
+if (fs.existsSync(stringsPath)) {
+  let strings = fs.readFileSync(stringsPath, 'utf8');
+  if (/<string\s+name=\"app_name\">.*?<\/string>/.test(strings)) {
+    strings = strings.replace(/<string\s+name=\"app_name\">.*?<\/string>/, '<string name=\"app_name\">Gatita Blanca Cromos</string>');
+  } else {
+    strings = strings.replace('</resources>', '  <string name=\"app_name\">Gatita Blanca Cromos</string>\n</resources>');
+  }
+  fs.writeFileSync(stringsPath, strings, 'utf8');
+}
+
 // Configure the AdMob App ID in AndroidManifest.xml. If no production App ID
 // is supplied, the script intentionally uses Google's test App ID.
 run('node', ['scripts/prepare-android-admob.mjs']);
